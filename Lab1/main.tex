@@ -1,0 +1,359 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage[
+    top=1in,
+    bottom=1in,
+    left=1.2in,
+    right=1in
+]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+ 
+
+\definecolor{srsnavy}{HTML}{1B4332}
+\definecolor{srsblue}{HTML}{2D6A4F}
+\definecolor{srsgrey}{HTML}{495057}
+ 
+\titleformat{\section}{\Large\bfseries\color{srsnavy}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{srsblue}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{srsgrey}}{\thesubsubsection}{0.6em}{}
+ 
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\small\textcolor{srsgrey}{\labtitle}}
+\fancyhead[R]{\small\textcolor{srsgrey}{\coursename}}
+\fancyfoot[L]{\small\textcolor{srsgrey}{\institution}}
+\fancyfoot[R]{\small\textcolor{srsgrey}{Page \thepage}}
+ 
+
+\newcommand{\reqheader}[3]{%
+  \rowcolor{srsnavy}
+  \textcolor{white}{\textbf{#1}} &
+  \textcolor{white}{\textbf{#2}} &
+  \textcolor{white}{\textbf{#3}} \\ \hline}
+ 
+
+\newcommand{\institution}{IOE, Purwanchal Campus}      % used in the footer
+\newcommand{\department}{Department of Electronics \& Computer Engineering}
+\newcommand{\logofile}{asdf.png}
+\newcommand{\coursename}{Software Engineering (Practical)}
+\newcommand{\coursecode}{ ENCT 352 }
+\newcommand{\labtitle}{Lab 1 -- Software Requirements Specification}
+\newcommand{\projecttitle}{Nepali Lifestyle Based Diet and Fitness Advisory System}   % <-- your project
+\newcommand{\submissiondate}{June 22, 2026}
+% \newcommand{\teamname}{Group XYZ}
+%==============================================================
+
+\begin{document}
+ 
+%--------------------------------------------------------------
+%  TITLE PAGE
+%--------------------------------------------------------------
+\begin{titlepage}
+\centering
+\vspace*{0.6cm}
+ 
+% ---- LOGO (shown if the image file exists; otherwise a placeholder) ----
+\IfFileExists{\logofile}{%
+  \includegraphics[width=15cm]{\logofile}%
+}{%
+  \fbox{\parbox[c][3cm][c]{3cm}{\centering\footnotesize Place\\ \texttt{\logofile}\\ beside this file}}%
+}\par
+
+\vspace{0.6cm}
+{\Huge\bfseries\color{srsnavy} Software Requirements Specification\par}
+\vspace{0.3cm}
+{\large\itshape Project: \projecttitle\par}
+\vspace{0.25cm}
+{\department\par}
+\vspace{1.5cm}
+ 
+% ---- submission details ----
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{>{\bfseries}l l}
+Course        & \coursename \\
+Course code   & \coursecode \\
+% Team          & \teamname \\
+Submitted on  & \submissiondate \\
+\end{tabular}
+ 
+\vspace{1.2cm}
+% ---- team members: add/remove rows ----
+{\bfseries\color{srsblue} Team Members}\par
+\vspace{0.3cm}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|l|l|}
+\hline
+\rowcolor{srsnavy}
+\textcolor{white}{\textbf{S.N.}} & \textcolor{white}{\textbf{Name}} & \textcolor{white}{\textbf{Roll / ID}} \\ \hline
+1 & HIMAL BHANDARI & PUR080BCT034 \\ \hline
+2 & KSHITIZ PORTEL & PUR080BCT039 \\ \hline
+3 & MANAV ACHARYA & PUR080BCT041 \\ \hline
+4 & MAUSAM PARAJULI & PUR080BCT045 \\ \hline
+\end{tabular}
+ 
+\vfill
+{\small\color{srsgrey} Submitted to: Asst prof. Binay Lal Shrestha }
+\end{titlepage}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+%==============================================================
+%  1. INTRODUCTION
+%==============================================================
+\section{Introduction}
+
+\subsection{Purpose}
+This document specifies the requirements for the Nepali Lifestyle Based Diet & Fitness Advisory
+System. It is intended for the development team, the instructor, and any stakeholder who needs to
+understand what the system must do before it is built.
+
+\subsection{Scope}
+The Nepali Lifestyle Based Diet & Fitness Advisory System will allow users to track their daily dietary
+intake and receive helpful recommendations based on their health conditions, cultural restrictions and
+food habits. It aims to provide a way for users to calculate the nutritional value of their foods especially
+tailored for the diverse food and cultural restrictions that people have in Nepal. Out of scope: medical
+diagnosis and treatment and wearable sensors and devices to track fitness
+
+\subsection{Definitions, Acronyms, and Abbreviations}
+\begin{description}[leftmargin=2.5cm,style=nextline]
+  \item[SRS] Software Requirements Specification
+  \item[LLM] Large Language Model
+  \item[YOLO] You Only Look Once (Object detection framework)
+  \item[RDBMS] Relational Database Management System (e.g., PostgreSQL)
+  \item[FR / NFR] Functional / Non-functional Requirement
+  % \item[GDM] Gestational Diabetes Mellitus
+  % \item[BMD] Bone Mineral Density
+\end{description}
+
+\subsection{Overview of the Document}
+This document is organized into eight major sections. Section 1 introduces the system, defining its purpose, scope, and key terms. Section 2 lists the key objectives of the software development process. Section 3 analyzes the project domain, discussing the existing systems, their challenges, and the proposed solution. Section 4 presents the chosen Software Process Model and its justification. Section 5 outlines the overall description of the product including its functions, user characteristics, key entities, constraints, and assumptions. Section 6 provides specific requirements, detailing user interfaces, functional requirements, and non-functional requirements. Section 7 presents the conclusion, followed by references in Section 8.
+
+\section{Objectives}
+\textbf{Aim:} To elicit the requirements of the chosen system and document them as a Software Requirements Specification using the IEEE~830 template.
+
+\textbf{Tools used:} \LaTeX{} for the document.
+
+
+\section{Project Domain Analysis}
+
+\subsection{Domain Description}
+The domain of diet and fitness advisory system covers food identification, nutrition calculation, food
+restrictions and generation of custom recommendations. Typical operations: setting user profile,
+food detection from image, portion estimation, nutrition calculation and custom recommendation
+generation.
+
+\subsection{Existing System Overview}
+Most common systems are developed for western users which don’t work for the diverse food culture
+found in Nepal. Even the ones that exist in Nepal are very limited in their datasets, rely on human
+experts to monitor the operations or are computationally expensive, making them unsuitable for
+realtime use.
+
+\subsection{Problems in Existing System}
+The existing methods used in nutrition and fitness recommendations systems present several challenges:
+\begin{itemize}[leftmargin=*]
+\item \textbf{Lack of Nepali Food Data:} International datasets lack information about culturally specific foods
+of Nepal making nutrition tracking difficult for Nepali users.
+\item \textbf{Lack of consideration for cultural constraints:}  Available systems fail to consider the religious
+or cultural restrictions like fasting or mourning
+\item \textbf{Poor Scalability:}  Existing clinical platforms in local hospitals require manual consultations with
+experts, limiting them from common user access.
+\item \textbf{Computational Inefficiency:} Computer vision tools developed for local food segmentation require
+high computational capacity, hindering them from real-time usage.
+\item \textbf{Low User Retention:} Generic advice that does not align with the local lifestyle leads to high attrition rates and low user engagement.
+% \item \textbf{Data Privacy Issues:} Existing digital fitness trackers often lack strict protocols to ensure ethical processing of sensitive user metrics.
+\end{itemize}
+
+\subsection{Proposed System}
+The proposed Nepali Lifestyle Based Diet and Fitness Advisory System is a responsive application utilizing a dual-database layer (PostgreSQL and ChromaDB) and lightweight AI models. The system features a custom YOLO-based instance segmentation model trained on Nepali cuisines for food detection, and utilizes cosine similarity in vector space to map local everyday food names to official databases. Recommendations are dynamically generated through a structured LLM backend that adheres to health metrics and cultural constraints.
+
+
+% \section{Software Process Model}
+
+% \subsection{Software Development Life Cycle (SDLC)}
+% We have decided to follow a combination of waterfall model with some elements of iterative model for this project. Development follows the following sequential progression.
+
+
+
+% \subsection{Process Model Diagram}
+% \begin{center}
+% \fbox{
+% \parbox{0.8\textwidth}{
+% \centering\small
+% \vspace{0.2cm}
+% Requirements Analysis $\rightarrow$ System Design $\rightarrow$ Implementation $\rightarrow$ Testing $\rightarrow$ Deployment $\rightarrow$ Maintenance
+% \vspace{0.2cm}
+% }
+% }
+% \end{center}
+
+\subsection{Software Development Life Cycle (SDLC)}
+We have decided to follow a combination of waterfall model with some elements of iterative model for this project. Development follows the following sequential progression.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SDLC.png}
+    \caption{\textbf{Software Development Lifecycle}}
+    % \label{fig:sdlc}
+\end{figure}
+
+
+\subsection{Process Model Diagram}
+
+\begin{center}
+\fbox{
+\parbox{0.8\textwidth}{
+\centering\small
+\vspace{0.2cm}
+Requirements Analysis $\rightarrow$ System Design $\rightarrow$ Implementation $\rightarrow$ Testing $\rightarrow$ Deployment $\rightarrow$ Maintenance
+\vspace{0.2cm}
+}
+}
+\end{center}
+
+\begin{center}
+\textbf{Figure 2: Process Model Diagram}
+\end{center}
+
+\subsection{Phases of the Model}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Requirements analysis:} Elicitation and formalization of functional and non-functional requirements resulting in this SRS document.
+  \item \textbf{System design:} Structuring the application architecture, database schemas (relational and vector), and designing the UI and ML interfaces.
+  \item \textbf{Implementation:} Development of the React frontend, Django/FastAPI backend, custom YOLO model integration, and vector search setup.
+  \item \textbf{Testing:} Executing unit, integration, and user acceptance tests to verify food item segmentation, name matching accuracy, and recommendation correctness.
+  \item \textbf{Deployment:} Hosting the frontend on Vercel and the backend on Render or Railway, making the app accessible to public users.
+  \item \textbf{Maintenance:} Providing updates, bug fixes, database expansions, and fine-tuning the recommendation generation.
+\end{enumerate}
+
+\subsection{Justification}
+\begin{itemize}[leftmargin=*]
+  \item The core workflow of a personal dietary advisory application is stable and well-defined (profile $\rightarrow$ input $\rightarrow$ analyze $\rightarrow$ recommend).
+  \item The project tasks (UI development, database matching, machine learning integration) are highly sequential, allowing clean phase transitions.
+  \item A clear baseline at each stage (SRS, design files, test logs) helps the development team maintain quality constraints.
+  \item The model fits well within the academic project timeline, ensuring structured reviews by mentors.
+\end{itemize}
+
+
+\section{Overall Description}
+
+\subsection{Product Perspective}
+The Nepali Lifestyle Based Diet and Fitness Advisory System is a standalone personal health assistant. It consists of a web/mobile frontend that communicates with a FastAPI and Django-based backend. The backend manages a relational database (PostgreSQL) for user data and a vector database (ChromaDB) for semantic food mapping. The system connects to standard external services for optional local LLM parsing or runs with quantized local models.
+
+\subsection{Product Functions}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Profile Management:} Register and capture user health profiles, dietary habits, and cultural constraints.
+  \item \textbf{Meal Logging:} Record daily meals manually or through image uploads.
+  \item \textbf{Food Image Upload:} Allow plate photograph upload for automatic visual analysis.
+  \item \textbf{Nutritional Analysis:} Segment food items from photos, estimate portion sizes, and calculate caloric/macronutrient values.
+  \item \textbf{Personalized Advisory:} Generate customized diet and fitness recommendations based on user profiles.
+  \item \textbf{Progress Tracking:} Visualize historical logs of nutrition, weight, and fitness targets.
+\end{itemize}
+
+\subsection{User Characteristics}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{General User (Patron):} Individual seeking health tracking; logs meals, views recommendations, and interacts with the dashboard.
+  \item \textbf{System Administrator:} Manages database updates, resolves system issues, monitors performance, and updates machine learning datasets.
+\end{itemize}
+
+\subsection{Key Entities}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{User Profile:} User ID, name, age, weight, height, activity level, medical restrictions, religious constraints.
+  \item \textbf{Food Item:} Item ID, local name, scientific name, portion size, calories, proteins, fats, carbohydrates.
+  \item \textbf{Meal Log:} Log ID, user ID, timestamp, meal type, image path, detected items, portion multipliers, total nutrients.
+  \item \textbf{Recommendation Plan:} Plan ID, user ID, date, target calories, meal plan, suggested physical exercises.
+\end{itemize}
+
+\subsection{Constraints}
+\begin{itemize}[leftmargin=*]
+  \item The backend API must be optimized to run food item detection within small latency windows.
+  \item User health data must be secured, with password hashing enforced.
+  \item The application layout must be mobile-responsive to cater to users logging meals on standard smartphones.
+\end{itemize}
+
+\subsection{Assumptions and Dependencies}
+\begin{itemize}[leftmargin=*]
+  \item Users have a mobile device or PC with stable internet connectivity and a working camera.
+  \item Nutritional data sourced from reference materials (e.g., Santosh Khatiwada, AMITPANT7) is accurate and sufficient for standard regional cuisines.
+\end{itemize}
+
+%==============================================================
+%  3. SPECIFIC REQUIREMENTS
+%==============================================================
+\section{Specific Requirements}
+
+\subsection{External Interface Requirements}
+\subsubsection{User Interfaces}
+A mobile-first browser interface featuring a dashboard, user profile page, meal log/image upload section, nutritional analysis report, and a workout plan schedule.
+\subsubsection{Hardware Interfaces}
+Standard web server infrastructure and mobile camera hardware for capturing plate photographs.
+\subsubsection{Software Interfaces}
+React frontend, Django and FastAPI backend runtime, PostgreSQL for relational user logs, and ChromaDB for vector-based semantic mapping.
+\subsubsection{Communication Interfaces}
+HTTPS protocol for secure client-server communication.
+
+\subsection{Functional Requirements}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|c|X|c|}
+\hline
+\reqheader{ID}{Functional Requirement}{Priority}
+FR-1 & The system shall allow users to register and manage their profile details including age, weight, height, activity level, medical conditions, and cultural/religious constraints. & High \\ \hline
+FR-2 & The system shall allow users to log their daily meals manually by entering text descriptions or food names. & High \\ \hline
+FR-3 & The system shall allow users to upload food plate images through their device camera or gallery. & High \\ \hline
+FR-4 & The system shall automatically detect and segment individual food items in uploaded images using a YOLO instance segmentation model. & High \\ \hline
+FR-5 & The system shall map local/colloquial food names (e.g., "bhat") to official database records using semantic cosine similarity in a vector database. & High \\ \hline
+FR-6 & The system shall analyze the portion sizes and calculate the total calories and macronutrients of logged meals. & High \\ \hline
+FR-7 & The system shall generate personalized daily diet recommendations and suggestions based on user profiles, medical conditions, and religious fasting constraints. & Medium \\ \hline
+% FR-8 & The system shall provide personalized daily fitness/exercise recommendations tailored to the user's physical condition and goals. & Medium \\ \hline
+% FR-9 & The system shall track and display user progress over time, including weight changes, caloric trends, and nutrient compliance. & Medium \\ \hline
+% FR-10 & The system shall enforce safety screening by warning users or filtering out food recommendations that conflict with their medical conditions. & High \\ \hline
+\end{tabularx}
+
+\subsection{Non-functional Requirements}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|c|X|c|}
+\hline
+\reqheader{ID}{Non-functional Requirement}{Category}
+NFR-1 & The system shall process food plate images and return segmented objects within 3 seconds. & Performance \\ \hline
+NFR-2 & Passwords shall be stored only as salted hashes. & Security \\ \hline
+NFR-3 & The user interface must be fully responsive, scaling properly down to 360px width without horizontal scrolling. & Usability \\ \hline
+% NFR-4 & The user interface must be fully responsive, scaling properly down to 360px width without horizontal scrolling. & Usability \\ \hline
+% NFR-5 & The backend codebase shall maintain at least 80\% unit test coverage and separate API, business, and ML layers to facilitate maintenance. & Maintainability \\ \hline
+\end{tabularx}
+
+\subsection{Other Requirements}
+\begin{itemize}[leftmargin=*]
+  % \item The local database of regional dishes and ingredients must be updated monthly to include new verified items.
+  \item The system shall support Romanized Nepali query terms (e.g., "gundruk", "bhat", "dal") for ease of searching.
+\end{itemize}
+
+%==============================================================
+%  4. CONCLUSION  (lab-report wrap-up)
+%==============================================================
+\section{Conclusion}
+In this lab, the team successfully elicited and documented the requirements of the Nepali Lifestyle Based Diet and Fitness Advisory System using the IEEE 830 template. The functional requirements, including user registration, food image upload, semantic food name matching, nutritional analysis, and personalized diet/fitness recommendations, were clearly defined alongside critical non-functional parameters. These structured specifications establish a traceable baseline for subsequent architectural design and software testing phases.
+
+\section{References}
+\begin{enumerate}[leftmargin=*]
+  \item IEEE Std 830-1998, IEEE Recommended Practice for Software Requirements Specifications.
+  \item Khatiwada, S., "Nepal Food Composition Table," Department of Food Technology and Quality Control, Ministry of Agriculture, Nepal.
+  \item Pant, A., "Nepali Meals Dataset," open-source repository for regional food classification.
+  \item Nepal Nutrition and Food Security Portal, Ministry of Health, Government of Nepal.
+  \item Ultralytics YOLO Real-Time Object Detection Framework, 2023.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,263 @@
+% =====================================================================
+% Lab Report 2 - Data Flow Diagram (DFD) Design
+% Project: Nepali Lifestyle Based Diet and Fitness Advisory System
+% Course: Software Engineering (Practical), ENCT 352
+% =====================================================================
+\documentclass[12pt,a4paper]{report}
+
+% ---------------------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------------------
+\usepackage[a4paper,margin=1in]{geometry}   % Page size and 1-inch margins
+\usepackage{newtxtext}                      % Times New Roman look-alike text font
+\usepackage{newtxmath}                      % Matching math font
+\usepackage{setspace}                       % Line spacing control
+\usepackage{graphicx}                       % Image inclusion
+\usepackage{float}                          % Precise figure placement with [H]
+\usepackage{caption}                        % Caption formatting
+\usepackage[hidelinks]{hyperref}            % Clickable TOC / cross-references
+\usepackage{titlesec}                       % Section heading formatting
+\usepackage{fancyhdr}                       % Header/footer and page numbering
+
+% ---------------------------------------------------------------------
+% GLOBAL FORMATTING
+% ---------------------------------------------------------------------
+\onehalfspacing                              % 1.5 line spacing throughout
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Justified paragraphs (default in LaTeX; \sloppy reduces overfull boxes)
+\sloppy
+
+% Caption style
+\captionsetup{font=small,labelfont=bf,justification=centering}
+
+% Section heading formatting (clean, professional numbering)
+\titleformat{\chapter}[hang]{\normalfont\Large\bfseries}{\thechapter.}{10pt}{\Large}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{8pt}{}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{6pt}{}
+
+% Header/footer: page numbers only (no header rule), suppressed on title page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% ---------------------------------------------------------------------
+% DOCUMENT
+% ---------------------------------------------------------------------
+\begin{document}
+
+% =====================================================================
+% TITLE PAGE (no page number)
+% =====================================================================
+\begin{titlepage}
+    \centering
+    \thispagestyle{empty}
+
+    \vspace*{0.3cm}
+    \includegraphics[width=0.85\textwidth]{tu_banner.png}\\[2cm]
+
+    {\Large \textbf{Lab Report 2}}\\[0.5cm]
+    {\large \textbf{Data Flow Diagram (DFD) Design}}\\[1.5cm]
+
+    {\normalsize Project:}\\[3pt]
+    {\large \textbf{Nepali Lifestyle Based Diet and Fitness Advisory System}}\\[2cm]
+
+    \begin{tabular}{ll}
+        \textbf{Course} & Software Engineering (Practical) \\[4pt]
+        \textbf{Course Code} & ENCT 352 \\
+    \end{tabular}
+
+    \vspace{2cm}
+
+    {\normalsize \textbf{Submitted By}}\\[8pt]
+    \begin{tabular}{ll}
+        HIMAL BHANDARI   & PUR080BCT034 \\
+        KSHITIZ PORTEL    & PUR080BCT039 \\
+        MANAV ACHARYA     & PUR080BCT041 \\
+        MAUSAM PARAJULI   & PUR080BCT045 \\
+    \end{tabular}
+
+    \vfill
+
+    \begin{tabular}{ll}
+        \textbf{Submitted To} & Department of Electronics and Computer Engineering \\
+        \textbf{Instructor} & Asst. Prof. Binay Lal Shrestha \\
+        \textbf{Date} & July 06, 2026 \\
+    \end{tabular}
+
+\end{titlepage}
+
+% =====================================================================
+% TABLE OF CONTENTS
+% =====================================================================
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% =====================================================================
+% CHAPTER: INTRODUCTION
+% =====================================================================
+\chapter{Introduction}
+
+A Data Flow Diagram (DFD) is a graphical representation that shows how data moves through a
+system, identifying the external entities that interact with the system, the processes that
+transform data, the data stores where information is retained, and the flows that connect them.
+Unlike the Software Requirements Specification, which describes \emph{what} a system must do
+in textual form, a DFD models \emph{how} data actually travels between the user and the
+internal processes, giving developers a clearer picture of system behaviour before design and
+coding begin.
+
+DFDs are prepared after the Software Requirements Specification because the requirements first
+establish the functional scope of the system, and the DFD then translates that scope into a
+structured, visual data flow model. This model helps the development team identify the exact
+inputs, outputs, and internal processing steps required to satisfy the requirements, and it
+exposes any gaps or inconsistencies before implementation starts.
+
+For the Nepali Lifestyle Based Diet and Fitness Advisory System, the DFDs prepared in this lab
+illustrate how user data, food images, and health goals flow between the user, the internal
+processes such as user management, food analysis, and recommendation generation, and the
+supporting data stores. These diagrams form the structural basis for the system design that
+follows in later phases of the project.
+
+% =====================================================================
+% CHAPTER: DATA FLOW DIAGRAMS
+% =====================================================================
+\chapter{Data Flow Diagrams}
+
+This chapter presents the Context Diagram, the Level 1 DFD, and the Level 2 DFD developed for
+the Nepali Lifestyle Based Diet and Fitness Advisory System. Each diagram is described in terms
+of its external entities, processes, data stores, and data flows.
+
+% ---------------------------------------------------------------------
+\section{Context Diagram}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{clear_context_diagram.png}
+    \caption{Context Diagram of the Nepali Lifestyle Based Diet and Fitness Advisory System}
+    \label{fig:context}
+\end{figure}
+
+The Context Diagram shown in Figure~\ref{fig:context} represents the highest level of the DFD,
+labelled as process 0. It provides an overview of the entire system as a single process and
+defines its boundary with the external environment.
+
+The only external entity in this diagram is the \textbf{User}. Two data flows connect the User
+to the Diet and Fitness Advisory System: ``Profile setup and meal photos'', which
+carries the user's profile information and meal images into the system, and
+``Diet and Fitness feedback'', which carries the generated recommendations back to the
+User. No data stores are shown at this level, since the Context Diagram treats the system as a
+single, undivided process.
+
+As the first and highest-level diagram, the Context Diagram does not expand any previous level.
+It instead establishes the overall system boundary that the Level 1 DFD subsequently decomposes
+into individual processes.
+
+% ---------------------------------------------------------------------
+\section{Level 1 DFD}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{clear_level1_dfd.png}
+    \caption{Level 1 DFD of the Nepali Lifestyle Based Diet and Fitness Advisory System}
+    \label{fig:level1}
+\end{figure}
+
+Figure~\ref{fig:level1} presents the Level 1 DFD, which decomposes the single process shown in
+the Context Diagram into three major processes of the system.
+
+The external entity remains the \textbf{User}. The three processes at this level are
+\textbf{1 User Management}, \textbf{2 Food Analysis}, and \textbf{3 Recommendation Generation}.
+Three data stores support these processes: \textbf{D1 User DB}, \textbf{D2 Food DB}, and
+\textbf{D3 Report DB}. The User provides personal information to User Management, which stores
+and retrieves user data from the User DB. The User also provides food details or a meal photo
+to Food Analysis, which stores food information in the Food DB. Recommendation Generation
+retrieves food information from the Food DB, stores and retrieves reports from the Report DB,
+and finally sends the diet and fitness plan along with the nutrition report back to the User.
+
+This diagram expands the single process of the Context Diagram into the three functional areas
+of the system: managing user profiles, analysing food, and generating recommendations. Each of
+these processes now has a defined data store and its own set of data flows, giving a clearer
+view of how the system separates its responsibilities internally.
+
+% ---------------------------------------------------------------------
+\section{Level 2 DFD}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{clear_level2_dfd.png}
+    \caption{Level 2 DFD - Decomposition of Process 3 (Recommendation Generation)}
+    \label{fig:level2}
+\end{figure}
+
+Figure~\ref{fig:level2} shows the Level 2 DFD, which further decomposes process 3,
+Recommendation Generation, from the Level 1 DFD into four sub-processes.
+
+The external entity is again the \textbf{User}. The four sub-processes are
+\textbf{3.1 Read User Data}, \textbf{3.2 Analyze Nutrition}, \textbf{3.3 Generate Diet and
+Fitness Plan}, and \textbf{3.4 Prepare Report}. Two data stores appear at this level, the
+\textbf{Food DB} and the \textbf{Report DB}. The User provides health goals to Read User Data,
+which passes this information to Analyze Nutrition. Analyze Nutrition stores food information in
+the Food DB, which is later retrieved by Generate Diet and Fitness Plan. The output of this
+sub-process flows into Prepare Report, which stores and retrieves report data from the Report
+DB and finally provides the diet plan, fitness plan, and health report back to the User.
+
+This diagram refines process 3 of the Level 1 DFD by breaking down Recommendation Generation
+into a sequential set of sub-processes that read user health goals, analyse nutrition against
+stored food information, generate the actual plan, and prepare the final report. It shows the
+internal working of the recommendation process without altering the data flows already defined
+at the higher level.
+
+% =====================================================================
+% CHAPTER: OVERALL DISCUSSION
+% =====================================================================
+\chapter{Overall Discussion}
+
+The three diagrams developed in this lab show a clear progression from a general overview to a
+detailed internal structure. The Context Diagram treats the Nepali Lifestyle Based Diet and
+Fitness Advisory System as a single process interacting with the User, establishing the system
+boundary. The Level 1 DFD then breaks this single process into three functional areas, User
+Management, Food Analysis, and Recommendation Generation, each supported by its own data store.
+The Level 2 DFD goes further by decomposing Recommendation Generation into four sequential
+sub-processes, revealing how user health goals are read, analysed against stored food data, and
+converted into a diet and fitness plan.
+
+Across these levels, information consistently flows from the User into the system, through the
+relevant process, into or out of a data store, and back to the User as feedback. This layered
+structure mirrors the system architecture described in the SRS, where profile management, food
+analysis, and recommendation generation form distinct but connected modules built on a
+relational data layer.
+
+These diagrams directly support the functional requirements defined in Lab 1, such as profile
+management, meal logging, and personalized advisory generation. By visualizing the exact data
+flows before implementation, the development team can verify that every requirement has a
+corresponding process and data path, making the DFDs a valuable reference during the design and
+coding phases that follow.
+
+% =====================================================================
+% CHAPTER: CONCLUSION
+% =====================================================================
+\chapter{Conclusion}
+
+In this lab, the Context Diagram, Level 1 DFD, and Level 2 DFD were developed for the Nepali
+Lifestyle Based Diet and Fitness Advisory System, based directly on the requirements identified
+in Lab 1. These diagrams illustrate how user information, meal data, and health goals move
+through the system's processes and data stores at increasing levels of detail.
+
+Data Flow Diagrams are important because they translate textual requirements into a visual model
+of system behaviour, making it easier to identify processes, data stores, and flows that must be
+implemented. Working across multiple levels, from the Context Diagram down to the Level 2
+decomposition, allows the team to understand both the overall system boundary and the detailed
+internal workings of specific processes such as recommendation generation.
+
+Completing this lab has clarified how the major modules of the system interact and exchange
+data, providing a solid foundation for the system design phase. Lab 2 therefore prepares the
+project for the next phase of development, in which these data flows will be translated into
+concrete database schemas and module-level designs.
+
+\end{document}
